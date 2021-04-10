@@ -11,7 +11,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{URL::to("css/style.css")}}">
+        <link rel="stylesheet" href="{{asset("css/style.css")}}">
     </head>
     <body>
         <div class="container">
