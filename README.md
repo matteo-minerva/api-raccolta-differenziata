@@ -6,10 +6,10 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <h3 align="center">api-raccolta-differenziata</h3>
+  <h3 align="center">API per la raccolta differenziata</h3>
 
   <p align="center">
-   Progetto realizzato per la Super Guida React
+   Progetto realizzato per la Super Guida PHP e MySQL
     <br />
     <br />
     <a href="https://api-raccolta-differenziata.herokuapp.com/">Live Demo</a>
