@@ -1,13 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Raccolta;
+
+// use DB;
 
 class ApiRaccoltaController extends Controller {
     public function index() {
-        return Raccolta::select( 'giorni', 'orario', 'rifiuto', 'istruzioni' )
+        $raccolta = Raccolta::select( "id as N.", "giorni as Giorni di raccolta", "orario as Fasce orarie", "rifiuto as Tipo di rifiuto", "istruzioni as Istruzioni per lo smaltimento" )
             ->get();
+
+        // var_dump( DB::getSchemaBuilder()->getColumnListing( "raccoltas" ) );
+        $colonne = ["N.", "Giorni di raccolta", "Fasce orarie", "Tipo di rifiuto", "Istruzioni per lo smaltimento"];
+
+        return view( "retrieve_all" )
+            ->with( "colonne", $colonne )
+            ->with( "raccolta", $raccolta );
     }
 
     public function add() {
@@ -61,33 +69,35 @@ class ApiRaccoltaController extends Controller {
         $giorno = $giorni_della_settimana[$giorno_corrente];
 
         ### Query builder
-        $raccolta = Raccolta::select( "orario", "rifiuto", "istruzioni" )
+        $raccolta = Raccolta::select( "id as N.", "orario as Fasce orarie", "rifiuto as Tipo di rifiuto", "istruzioni as Istruzioni per lo smaltimento" )
             ->where( "giorni", "like", "%" . $giorno . "%" )
             ->orderBy( "orario", "asc" )
             ->get();
 
         ### Mostra un messaggio d'errore nel caso in cui non sia previsto ritiro alcuno
+        $errore = "";
         if ( count( $raccolta ) == 0 ) {
-            return [
-                "Errore" => "$giorno non è previsto il ritiro di alcun tipo di pattume",
-            ];
+            $errore = "$giorno non è previsto il ritiro di alcun tipo di pattume";
         }
-        return $raccolta;
+        return view( "raccolta_odierna" )
+            ->with( "raccolta", $raccolta )
+            ->with( "errore", $errore );
     }
 
     public function raccoltaPerMateriale( $materiale ) {
         ### Query builder
-        $raccolta = Raccolta::select( "giorni", "orario", "istruzioni" )
+        $raccolta = Raccolta::select( "id as N.", "giorni as Giorni di raccolta", "orario as Fasce orarie", "istruzioni as Istruzioni per lo smaltimento" )
             ->where( "rifiuto", "like", "%" . $materiale . "%" )
             ->get();
 
         ### Mostra un messaggio d'errore nel caso in cui non sia previsto ritiro alcuno
+        $errore = "";
         if ( count( $raccolta ) == 0 ) {
-            return [
-                "Errore" => "Non esiste alcun giorno in cui è previsto il ritiro di $materiale",
-            ];
+            $errore = "Non esiste alcun giorno in cui è previsto il ritiro di $materiale";
         }
 
-        return $raccolta;
+        return view( "raccolta_materiale" )
+            ->with( "raccolta", $raccolta )
+            ->with( "errore", $errore );
     }
 }
