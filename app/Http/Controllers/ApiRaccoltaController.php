@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 use App\Models\Raccolta;
 
+$GLOBALS = array(
+    "errore" => "",
+);
+
 class ApiRaccoltaController extends Controller {
     public function index() {
         $raccolta = Raccolta::select( "id as N.", "giorni as Giorni di raccolta", "orario as Fasce orarie", "rifiuto as Tipo di rifiuto", "istruzioni as Istruzioni per lo smaltimento" )
             ->get();
 
         return view( "pages.retrieve_all" )
+            ->with( $GLOBALS["errore"] )
             ->with( "raccolta", $raccolta );
     }
 
@@ -69,14 +74,13 @@ class ApiRaccoltaController extends Controller {
             ->get();
 
         ### Mostra un messaggio d'errore nel caso in cui non sia previsto ritiro alcuno
-        $errore = "";
         if ( count( $raccolta ) == 0 ) {
-            $errore = "$giorno non è previsto il ritiro di alcun tipo di pattume";
+            $GLOBALS["errore"] = "$giorno non è previsto il ritiro di alcun tipo di pattume";
         }
 
         return view( "pages.raccolta_odierna" )
             ->with( "raccolta", $raccolta )
-            ->with( "errore", $errore );
+            ->with( "errore", $GLOBALS["errore"] );
     }
 
     public function raccoltaPerMateriale( $materiale ) {
@@ -86,13 +90,12 @@ class ApiRaccoltaController extends Controller {
             ->get();
 
         ### Mostra un messaggio d'errore nel caso in cui non sia previsto ritiro alcuno
-        $errore = "";
         if ( count( $raccolta ) == 0 ) {
-            $errore = "Non esiste alcun giorno in cui è previsto il ritiro di $materiale";
+            $GLOBALS["errore"] = "Non esiste alcun giorno in cui è previsto il ritiro di $materiale";
         }
 
         return view( "pages.raccolta_materiale" )
             ->with( "raccolta", $raccolta )
-            ->with( "errore", $errore );
+            ->with( "errore", $GLOBALS["errore"] );
     }
 }
