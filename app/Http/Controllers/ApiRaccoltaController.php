@@ -61,11 +61,15 @@ class ApiRaccoltaController extends Controller {
         ];
     }
 
-    public function raccoltaOdierna() {
-        ### Che giorno della settimana è?
-        $giorno_corrente = date( "w" );
+    public function raccoltaPerGiorno( $inputGiorno ) {
         $giorni_della_settimana = array( "Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato" );
-        $giorno = $giorni_della_settimana[$giorno_corrente];
+        $giorno = $inputGiorno;
+
+        ### Che giorno della settimana è?
+        if ( $inputGiorno === "oggi" ) {
+            $giorno_corrente = date( "w" );
+            $giorno = $giorni_della_settimana[$giorno_corrente];
+        }
 
         ### Query builder
         $raccolta = Raccolta::select( "id as N.", "orario as Fasce orarie", "rifiuto as Tipo di rifiuto", "istruzioni as Istruzioni per lo smaltimento" )

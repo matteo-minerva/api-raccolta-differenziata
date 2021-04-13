@@ -3,22 +3,12 @@
 use App\Http\Controllers\ApiRaccoltaController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
- */
-
-Route::get( "/", [ApiRaccoltaController::class, "mainPage"] );
-Route::get( "/all", [ApiRaccoltaController::class, "index"] );
+### CURD ops
+Route::get( "/", [ApiRaccoltaController::class, "index"] );
 Route::post( "/add", [ApiRaccoltaController::class, "add"] );
 Route::put( "/raccolta/{raccolta}", [ApiRaccoltaController::class, "update"] );
 Route::delete( "/raccolta/{raccolta}", [ApiRaccoltaController::class, "delete"] );
 
-Route::get( "/oggi", [ApiRaccoltaController::class, "raccoltaOdierna"] );
+### Custom ops
+Route::get( "/giorno/{giorno}", [ApiRaccoltaController::class, "raccoltaPerGiorno"] );
 Route::get( "/raccolta/{materiale}", [ApiRaccoltaController::class, "raccoltaPerMateriale"] );
