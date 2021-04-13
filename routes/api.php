@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
+Route::get( "/", [ApiRaccoltaController::class, "mainPage"] );
 Route::get( "/all", [ApiRaccoltaController::class, "index"] );
 Route::post( "/add", [ApiRaccoltaController::class, "add"] );
 Route::put( "/raccolta/{raccolta}", [ApiRaccoltaController::class, "update"] );

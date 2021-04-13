@@ -3,18 +3,12 @@
 namespace App\Http\Controllers;
 use App\Models\Raccolta;
 
-// use DB;
-
 class ApiRaccoltaController extends Controller {
     public function index() {
         $raccolta = Raccolta::select( "id as N.", "giorni as Giorni di raccolta", "orario as Fasce orarie", "rifiuto as Tipo di rifiuto", "istruzioni as Istruzioni per lo smaltimento" )
             ->get();
 
-        // var_dump( DB::getSchemaBuilder()->getColumnListing( "raccoltas" ) );
-        $colonne = ["N.", "Giorni di raccolta", "Fasce orarie", "Tipo di rifiuto", "Istruzioni per lo smaltimento"];
-
-        return view( "retrieve_all" )
-            ->with( "colonne", $colonne )
+        return view( "pages.retrieve_all" )
             ->with( "raccolta", $raccolta );
     }
 
@@ -79,7 +73,8 @@ class ApiRaccoltaController extends Controller {
         if ( count( $raccolta ) == 0 ) {
             $errore = "$giorno non è previsto il ritiro di alcun tipo di pattume";
         }
-        return view( "raccolta_odierna" )
+
+        return view( "pages.raccolta_odierna" )
             ->with( "raccolta", $raccolta )
             ->with( "errore", $errore );
     }
@@ -96,7 +91,7 @@ class ApiRaccoltaController extends Controller {
             $errore = "Non esiste alcun giorno in cui è previsto il ritiro di $materiale";
         }
 
-        return view( "raccolta_materiale" )
+        return view( "pages.raccolta_materiale" )
             ->with( "raccolta", $raccolta )
             ->with( "errore", $errore );
     }
