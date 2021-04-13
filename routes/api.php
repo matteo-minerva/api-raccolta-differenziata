@@ -3,7 +3,7 @@
 use App\Http\Controllers\ApiRaccoltaController;
 use Illuminate\Support\Facades\Route;
 
-### CURD ops
+### CRUD ops
 Route::get( "/", [ApiRaccoltaController::class, "index"] );
 Route::post( "/add", [ApiRaccoltaController::class, "add"] );
 Route::put( "/raccolta/{raccolta}", [ApiRaccoltaController::class, "update"] );
