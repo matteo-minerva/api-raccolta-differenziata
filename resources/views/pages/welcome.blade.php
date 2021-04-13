@@ -33,7 +33,7 @@
                     <code>{{URL::to("/")}}/api/oggi/</code>, con la quale è possibile sapere se in data odierna sono previsti ritiri;
                 </li>
                 <li>
-                    <code>{{URL::to("/")}}/api/raccolta/{materiale}}</code>, con la quale è possibile sapere quando e se è previsto il ritiro di un determinato materiale-
+                    <code>{{URL::to("/")}}/api/raccolta/{materiale}</code>, con la quale è possibile sapere quando e se è previsto il ritiro di un determinato materiale.
                 </li>
             </ul>
 
