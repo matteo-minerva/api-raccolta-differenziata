@@ -10,18 +10,15 @@
 
   <p align="center">
    Progetto realizzato per la Super Guida PHP e MySQL
-    <br />
-    <br />
-    <a href="https://api-raccolta-differenziata.herokuapp.com/">Live Demo</a>
-  </p>
 </p>
 
 <!-- RIGUARDO IL PROGETTO -->
 
 ## About
 
-<a href="https://api-raccolta-differenziata.herokuapp.com/"><img src="https://i.imgur.com/s0BysDT.png"/></a>
+<img src="https://i.imgur.com/s0BysDT.png"/>
 Si tratta di una API che permette la gestione del calendario relativo al ritiro del pattume. Implementa tutte e quattro le operazioni CURD e permette di sapere se è previsto un qualche ritiro in data odierna e quando è previsto invece quello di un determinato materiale.
+<br>
 <br>
 "api_raccolta_rifiuti.sql" è il database utilizzato. <br>
 "API_tests.http" permette di effettuare chiamate all'API utilizzando l'estensione REST Client di Visual Studio Code.
